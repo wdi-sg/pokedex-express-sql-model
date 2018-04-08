@@ -1,7 +1,8 @@
-const pokemons = require('./controllers/pokemon');
-const users = require('./controllers/user');
-
 module.exports = (app, db) => {
+
+  const pokemons = require('./controllers/pokemon')(db);
+  const users = require('./controllers/user')(db);
+
   /*
    *  =========================================
    *  Users
@@ -9,7 +10,7 @@ module.exports = (app, db) => {
    */
   // CRUD users
   app.get('/users/new', users.newForm);
-  app.post('/users', users.create(db));
+  app.post('/users', users.create);
 
   // Authentication
   app.post('/users/logout', users.logout);
@@ -22,9 +23,9 @@ module.exports = (app, db) => {
    *  =========================================
    */
   // CRUD pokemons
-  app.get('/pokemons/:id/edit', pokemons.updateForm(db));
-  app.post('/pokemons/:id/edit', pokemons.update(db));
+  app.get('/pokemons/:id/edit', pokemons.updateForm);
+  app.post('/pokemons/:id/edit', pokemons.update);
   app.get('/pokemons/new', pokemons.createForm);
-  app.post('/pokemons', pokemons.create(db));
-  app.get('/pokemons/:id', pokemons.get(db));
+  app.post('/pokemons', pokemons.create);
+  app.get('/pokemons/:id', pokemons.get);
 };

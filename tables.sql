@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS pokemons (
   name varchar(255),
   img varchar(255),
   weight varchar(255),
-  height varchar(255)
+  height varchar(255),
+  user_id varchar(255)
 );
 
 -- create users table
